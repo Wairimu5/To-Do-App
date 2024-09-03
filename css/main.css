@@ -1,0 +1,181 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Todo List Styles */
+.todo-list {
+  padding: 1rem;
+  list-style: none;
+}
+
+.todo-list li {
+  background: white;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+  margin-block-end: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.todo-list .button-complete {
+  order: -1;
+}
+
+.todo-list .svg-check {
+  stroke: black;
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  top: -0.5rem;
+  left: 0.1rem;
+  opacity: 0;
+}
+
+.todo-list .complete .svg-check {
+  opacity: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: do-check 1s infinite alternate;
+}
+
+@keyframes do-check {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.todo-list .editing {
+  outline: 1px solid #007bff; /* or any other brand color */
+}
+
+.todo-list .editing .text {
+  display: none;
+}
+
+.todo-list [data-complete="true"] .text {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #007bff; /* or any other brand color */
+  opacity: 0.5;
+}
+
+.todo-list .empty {
+  justify-content: center;
+  background: none;
+  box-shadow: none;
+}
+
+/* Form and Input Styles */
+.form-edit {
+  width: 100%;
+}
+
+.input-edit {
+  font: inherit;
+  border: 0;
+  width: 100%;
+  padding: 0;
+}
+
+.input-edit:focus {
+  outline: none;
+}
+
+/* Button Styles */
+.button-complete {
+  border: 0;
+  border-radius: 3px;
+  background: #e9ecef; /* or any other gray color */
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  position: relative;
+}
+
+/* Screen Reader Text */
+.screen-reader-text {
+  text-indent: -9999em;
+  width: 0;
+  height: 0;
+  display: block;
+}
+
+/* Footer Styles */
+footer {
+  font-size: 0.8rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+footer .note {
+  opacity: 0.5;
+}
+
+/* Todo Type Toggle Styles */
+.todo-type-toggles {
+  display: flex;
+}
+
+.todo-type-toggles button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.2rem 1rem;
+  background: white;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.todo-type-toggles button[aria-pressed="true"] {
+  background: #007bff; /* or any other brand color */
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.todo-type-toggles button:active {
+  position: relative;
+  top: 1px;
+}
+
+.todo-type-toggles button:hover,
+.todo-type-toggles button:focus-visible {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.todo-type-toggles button:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+.todo-type-toggles button:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+/* Animations */
+@keyframes shake {
+  50% {
+    transform: rotate(-12deg);
+  }
+}
+
+@keyframes added {
+  50% {
+    transform: rotate(1turn) translateY(50px);
+  }
+}
+
