@@ -1,53 +1,172 @@
-/* General Styles */
+* {
+  box-sizing: border-box;
+}
+html {
+  --gray800: oklch(10% 0% 0);
+  --gray600: oklch(40% 0% 0);
+  --gray100: oklch(92% 0% 0);
+  --brand: oklch(85% 0.3 145);
+
+  font-family: system-ui, sans-serif;
+  background: var(--gray100);
+}
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
 }
 
 header {
-  background: #333;
+  background: var(--gray800);
   color: white;
   padding: 1rem;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  h1 {
+    margin: 0;
+    font-variation-settings: "wght" 900, "wdth" 700;
+  }
+  .svg-check {
+    width: 2lh;
+    height: 2lh;
+    stroke: var(--brand);
+  }
 }
 
-/* Todo List Styles */
+.svg-check,
+.svg-plus {
+  fill: none;
+  stroke-width: 30;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+  pointer-events: none;
+}
+
+.todo-form {
+  background: var(--gray600);
+  justify-content: center;
+  padding: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+  label {
+    flex: 1 0;
+    max-width: 40ch;
+  }
+  input {
+    background: var(--gray100);
+    width: 100%;
+    border: 0;
+    padding: 0.5rem;
+    box-shadow: inset 1px 1px 2px oklch(0% 0% 0 / 0.6);
+    border-radius: 5px;
+    font: inherit;
+    font-size: 2rem;
+    &:focus {
+      background: white;
+    }
+  }
+  .svg-plus {
+    stroke: black;
+    width: 66%;
+  }
+}
+
+.button-add-todo {
+  border: 0;
+  border-radius: 5px;
+  font: inherit;
+  font-size: 2rem;
+  font-weight: 900;
+  background: var(--brand);
+  aspect-ratio: 1;
+  height: 3.35rem;
+  display: inline-grid;
+  place-items: center;
+  line-height: 0;
+
+  &:hover,
+  &:focus {
+    background: color-mix(in oklch, var(--brand) 100%, black 10%);
+  }
+
+  &.shake {
+    rotate: 0deg;
+    transform-origin: bottom right;
+    animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+  &.added {
+    transform-origin: center center;
+    animation: added 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+}
+@keyframes shake {
+  50% {
+    rotate: -12deg;
+  }
+}
+@keyframes added {
+  50% {
+    rotate: 1turn;
+    translate: 0 50px;
+  }
+}
+
 .todo-list {
   padding: 1rem;
   list-style: none;
-}
+  li {
+    background: white;
+    box-shadow: 1px 1px 2px oklch(0% 0% 0 / 0.2);
+    padding: 0.5rem;
+    margin-block-end: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    .button-complete {
+      order: -1;
+    }
+    .svg-check {
+      stroke: black;
+      position: absolute;
+      width: 2rem;
+      height: 2rem;
+      top: -0.5rem;
+      left: 0.1rem;
+      opacity: 0;
+    }
+    &.complete {
+      .svg-check {
+        opacity: 1;
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+        /* https://css-tricks.com/a-trick-that-makes-drawing-svg-lines-way-easier/ */
+        animation: do-check 1s infinite alternate;
+      }
+    }
+    &.editing {
+      outline: 1px solid var(--brand);
 
-.todo-list li {
-  background: white;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  padding: 0.5rem;
-  margin-block-end: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+      .text {
+        display: none;
+      }
+    }
 
-.todo-list .button-complete {
-  order: -1;
-}
+    &[data-complete="true"] {
+      .text {
+        text-decoration: line-through;
+        text-decoration-thickness: 2px;
+        text-decoration-color: var(--brand);
+        opacity: 0.5;
+      }
+    }
 
-.todo-list .svg-check {
-  stroke: black;
-  position: absolute;
-  width: 2rem;
-  height: 2rem;
-  top: -0.5rem;
-  left: 0.1rem;
-  opacity: 0;
-}
-
-.todo-list .complete .svg-check {
-  opacity: 1;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: do-check 1s infinite alternate;
+    &.empty {
+      justify-content: center;
+      background: none;
+      box-shadow: none;
+    }
+  }
 }
 
 @keyframes do-check {
@@ -59,56 +178,30 @@ header {
   }
 }
 
-.todo-list .editing {
-  outline: 1px solid #007bff; /* or any other brand color */
-}
-
-.todo-list .editing .text {
-  display: none;
-}
-
-.todo-list [data-complete="true"] .text {
-  text-decoration: line-through;
-  text-decoration-thickness: 2px;
-  text-decoration-color: #007bff; /* or any other brand color */
-  opacity: 0.5;
-}
-
-.todo-list .empty {
-  justify-content: center;
-  background: none;
-  box-shadow: none;
-}
-
-/* Form and Input Styles */
 .form-edit {
   width: 100%;
 }
-
 .input-edit {
   font: inherit;
   border: 0;
   width: 100%;
   padding: 0;
+  &:focus {
+    outline: none;
+  }
 }
 
-.input-edit:focus {
-  outline: none;
-}
-
-/* Button Styles */
 .button-complete {
   border: 0;
   border-radius: 3px;
-  background: #e9ecef; /* or any other gray color */
-  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+  background: var(--gray100);
+  box-shadow: inset 1px 1px 2px oklch(0% 0% 0 / 0.2);
   padding: 0.25rem;
   width: 1.5rem;
   height: 1.5rem;
   position: relative;
 }
 
-/* Screen Reader Text */
 .screen-reader-text {
   text-indent: -9999em;
   width: 0;
@@ -116,9 +209,13 @@ header {
   display: block;
 }
 
-/* Footer Styles */
 footer {
   font-size: 0.8rem;
+
+  > .note {
+    opacity: 0.5;
+  }
+
   display: flex;
   gap: 1rem;
   justify-content: space-between;
@@ -126,56 +223,33 @@ footer {
   padding: 0 1rem;
 }
 
-footer .note {
-  opacity: 0.5;
-}
-
-/* Todo Type Toggle Styles */
 .todo-type-toggles {
   display: flex;
-}
 
-.todo-type-toggles button {
-  border: 0;
-  border-radius: 8px;
-  padding: 0.2rem 1rem;
-  background: white;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-}
+  button {
+    border: 0;
+    border-radius: 8px;
+    padding: 0.2rem 1rem;
+    background: var(--button-bg, white);
+    box-shadow: 1px 1px 3px oklch(0% 0% 0 / 0.2);
+    &[aria-pressed="true"] {
+      --button-bg: var(--brand);
+      box-shadow: 0 1px 1px oklch(0% 0% 0 / 0.4);
+    }
+    &:active {
+      position: relative;
+      top: 1px;
+    }
+    &:hover,
+    &:focus-visible {
+      background: color-mix(in oklch, var(--button-bg), black 10%);
+    }
+  }
 
-.todo-type-toggles button[aria-pressed="true"] {
-  background: #007bff; /* or any other brand color */
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-}
-
-.todo-type-toggles button:active {
-  position: relative;
-  top: 1px;
-}
-
-.todo-type-toggles button:hover,
-.todo-type-toggles button:focus-visible {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.todo-type-toggles button:first-child {
-  border-radius: 5px 0 0 5px;
-}
-
-.todo-type-toggles button:last-child {
-  border-radius: 0 5px 5px 0;
-}
-
-/* Animations */
-@keyframes shake {
-  50% {
-    transform: rotate(-12deg);
+  button:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+  button:last-child {
+    border-radius: 0 5px 5px 0;
   }
 }
-
-@keyframes added {
-  50% {
-    transform: rotate(1turn) translateY(50px);
-  }
-}
-
