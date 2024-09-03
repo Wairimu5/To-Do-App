@@ -24,7 +24,7 @@ document.querySelector('#todo-list').addEventListener('click', (e) => {
       return todo;
     });
     Storage.saveTodos(todos);
-    UI.renderTodos(todos);
+    buildUI(document.querySelector('.todo-type-toggles > button[aria-pressed="true"]').textContent);
   }
 });
 
