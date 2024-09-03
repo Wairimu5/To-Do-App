@@ -17,7 +17,12 @@ document.querySelector('#todo-list').addEventListener('click', (e) => {
   if (e.target.classList.contains('complete-btn')) {
     const id = e.target.parentElement.id;
     let todos = Storage.getTodos();
-    todos = todos.filter(todo => todo.id !== id);
+    todos = todos.map(todo => {
+      if (todo.id === id) {
+        todo.complete = !todo.complete; // Toggle completion status
+      }
+      return todo;
+    });
     Storage.saveTodos(todos);
     UI.renderTodos(todos);
   }
