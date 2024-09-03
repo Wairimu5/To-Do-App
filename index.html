@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do App</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <header>
-    <svg class="site-logo" width="20" height="20" viewBox="0 0 241.44 259.83">
-      <polyline pathLength="1" points="16.17 148.63 72.17 225.63 225.17 11.63"></polyline>
+    <svg class="svg-check site-logo">
+      <polyline points="16.17 148.63 72.17 225.63 225.17 11.63"></polyline>
     </svg>
     <h1>TODOs</h1>
   </header>
@@ -17,14 +18,12 @@
   <form id="todo-form" class="todo-form">
     <label>
       <span class="screen-reader-text">New TODO</span>
-      <input type="text" name="todo" required>
+      <input type="text" name="todo" placeholder="Enter a new task">
     </label>
     <button id="button-add-todo" class="button-add-todo">
-      <svg class="svg-plus" width="20" height="20" viewBox="0 0 20 20">
-        <g>
-          <line x1="5" y1="10" x2="15" y2="10"></line>
-          <line x1="10" y1="5" x2="10" y2="15"></line>
-        </g>
+      <svg class="svg-plus">
+        <line x1="5" y1="10" x2="15" y2="10"></line>
+        <line x1="10" y1="5" x2="10" y2="15"></line>
       </svg>
     </button>
   </form>
@@ -36,9 +35,7 @@
 
   <ol id="todo-list" class="todo-list"></ol>
 
-  <script src="js/storage.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
 
