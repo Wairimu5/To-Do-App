@@ -26,4 +26,4 @@ Updating Profile: Once you load the page, you will be prompted to create the pro
 ## Access the To-Do List App
 
 You can access and use the To-Do List app via this link: [To-Do List App](https://wairimu5.github.io/To-Do-App/)
-
+You can access the video demo via this link [To-Do List App](https://youtu.be/nyO3E1O-SXE)
